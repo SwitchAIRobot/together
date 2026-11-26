@@ -1,0 +1,5 @@
+csv_line,postcode,reason
+247,JE2,"coordinates missing or outside UK bounds (100,0)"
+1348,IM7,"coordinates missing or outside UK bounds (100,0)"
+4659,IM7,"coordinates missing or outside UK bounds (100,0)"
+4660,IM9,"coordinates missing or outside UK bounds (100,0)"
