@@ -1,6 +1,6 @@
 'use strict';
 // ===== CONFIG (edit here) =====
-const VOTE={question:'PLACEHOLDER: Should digital ID ever be compulsory?'};
+const VOTE={question:'PLACEHOLDER: Should together continue under its current setup?'};
 const STRIPE_LINKS={
  // Stripe Dashboard > Payment links > New > Donation: one-time, fixed £5
  donate5Once:'https://buy.stripe.com/PLACEHOLDER_donate5',
@@ -64,9 +64,9 @@ function drawMap(){const q=S.q,items=search(S.data.comm,['postcode','type','regi
  Object.values(by).forEach(g=>{const a=g[0],hub=g.some(x=>x.hub),n=g.reduce((s,x)=>s+(x.count||0),0);
   L.circleMarker([a.lat,a.lng],{renderer:r,radius:hub?10:3+Math.min(8,n/2),color:hub?'#D10D0D':'#595959',fillColor:hub?'#D10D0D':'#595959',fillOpacity:.8}).addTo(map).bindPopup(`<b>${esc(a.postcode)}</b>${hub?' (Local hub)':''}<br>Venue: Not stated<br>Region: ${esc(a.region)}<br>`+g.map(x=>`${esc(x.type)}: ${esc(x.count)}`).join('<br>'))})}
 function vote(){const v=LS.get('tg:vote',null),t=LS.get('tg:tally',{yes:0,no:0}),n=t.yes+t.no||1;
- return `<div class="card"><h2>${esc(VOTE.question)}</h2>${v?'':'<button data-v="yes">Yes</button><button data-v="no">No</button>'}${v?`<p>You voted ${v}.</p>`:''}<div class="bar" style="width:${t.yes/n*100}%;min-width:50px">Yes ${Math.round(t.yes/n*100)}%</div><div class="bar" style="width:${t.no/n*100}%;min-width:50px">No ${Math.round(t.no/n*100)}%</div><p class="muted">Results are stored on this device only (no backend).</p></div>`}
+ return `<div class="card"><h2>${esc(VOTE.question)}</h2>${v?'':'<button data-v="yes">Yes</button><button data-v="no">No</button>'}${v?`<p>You voted ${v}.</p><button data-v="reset">Clear my answer</button>`:''}<div class="bar" style="width:${t.yes/n*100}%;min-width:50px">Yes ${Math.round(t.yes/n*100)}%</div><div class="bar" style="width:${t.no/n*100}%;min-width:50px">No ${Math.round(t.no/n*100)}%</div><p class="muted">Results are stored on this device only (no backend).</p></div>`}<div class="bar" style="width:${t.yes/n*100}%;min-width:50px">Yes ${Math.round(t.yes/n*100)}%</div><div class="bar" style="width:${t.no/n*100}%;min-width:50px">No ${Math.round(t.no/n*100)}%</div><p class="muted">Results are stored on this device only (no backend).</p></div>`}
 function shop(){const s=S.shop;return `<div class="seg">${['Membership','Tickets','Merch'].map(x=>`<button data-shop="${x}" aria-pressed="${s===x}">${x}</button>`).join('')}</div>`+(s==='Membership'?`<div class="card">${linkBtns(STRIPE_LINKS.mem)}</div>`:s==='Tickets'?tickets():`<div class="card">${linkBtns(STRIPE_LINKS.merch)}</div>`)}
-const VIEWS={About:()=>`<div class="card"><h2>About</h2><p>A campaign group that works with the public and amplifies their voice. We stand for individual freedoms, autonomy, privacy and push back on state overreach. We fight for the everyday person, their freedom of speech, choice and individual rights.</p></div>`,Campaigns:campaigns,Community:community,Vote:vote,
+const VIEWS={About:()=>`<div class="card"><h2>About</h2><p>A campaign group that works with the public and amplifies their voice. </p><p>We stand for individual freedoms, autonomy, privacy and push back on state overreach.</p><p>We fight for the everyday person, their freedom of speech, choice and individual rights.</p></div>`,Campaigns:campaigns,Community:community,Vote:vote,
  Donate:()=>`<div class="card"><h2>Donate</h2><a class="btn" href="${STRIPE_LINKS.donate5Once}">£5 one-off</a><a class="btn" href="${STRIPE_LINKS.donate5Monthly}">£5 monthly</a><a class="btn" href="${STRIPE_LINKS.donateChoose}">Choose your amount (£10 / £25 / £50 / £100)</a></div>`,Shop:shop};
 function render(){const a=$('#app');a.innerHTML=VIEWS[S.tab]();if(S.tab==='Community')drawMap();
  $('#nav').innerHTML=Object.entries(TABS).map(([k,d])=>`<button data-tab="${k}" ${k===S.tab?'aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"/></svg>${k}</button>`).join('');
