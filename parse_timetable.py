@@ -20,7 +20,7 @@ for i, r in enumerate(csv.DictReader(open('community.csv', encoding='utf-8-sig')
                 lat, lng = d['latitude'], d['longitude']
             except Exception as e: flagged.append((i, pc, 'geocode failed: %s' % e)); continue
         else: flagged.append((i, pc, 'coordinates missing or outside UK bounds (%s,%s)' % (r.get('LAT'), r.get('LONG')))); continue
-    typ = (r.get('Revenue Type') or 'Not stated').strip()
+    typ = (r.get('Type') or r.get('Revenue Type') or 'Not stated').strip()
     rows.append({'id': 'c%d' % i, 'type': typ, 'region': 'Not stated', 'postcode': pc,
                  'lat': round(lat, 6), 'lng': round(lng, 6), 'count': cnt, 'hub': typ.lower() == 'local hub'})
 json.dump(rows, open('community.json', 'w'), separators=(',', ':'))
