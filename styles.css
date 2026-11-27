@@ -1,7 +1,7 @@
 :root{--black:#000000;--white:#FFFFFF;--red:#D10D0D;--charcoal:#222222;--grey:#595959}
 *{box-sizing:border-box}body{margin:0;background:var(--black);color:var(--white);font:16px/1.5 Aptos,"Segoe UI",system-ui,sans-serif;padding-bottom:76px}
 header{background:var(--black);padding:20px 16px 12px;text-align:center;border-bottom:6px solid var(--red)}
-h1{margin:0;font:900 clamp(2.4rem,12vw,4rem)/1 "Zona Black","Arial Black",sans-serif;letter-spacing:-.04em}
+h1{margin:0;font:900 clamp(2.4rem,12vw,4rem)/1 "Arial Narrow","Arial Black",sans-serif;letter-spacing:-.04em}
 header p{margin:18px 0 0;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase}
 main{padding:16px;max-width:760px;margin:auto}h2{margin:.5em 0}
 .card{background:var(--white);color:var(--charcoal);padding:14px;margin:0 0 12px;border-left:8px solid var(--red)}
